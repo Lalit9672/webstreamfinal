@@ -6,19 +6,21 @@ const webrtc = require("wrtc");
 
 let senderStream;
 
-app.use(express.static("public"));
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("frontend/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-  });
-}
+//app.use(express.static("public"));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("frontend/build"));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+//   });
+// }
+
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 // app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("frontend/build"));
 
 app.get("/", (req, res) => {
-  res.send("HEELLO");
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
 app.post("/consumer", async ({ body }, res) => {
