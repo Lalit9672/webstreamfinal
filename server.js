@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
-app.post("/consumer", async ({ body }, res) => {
+app.post("/api/consumer", async ({ body }, res) => {
   console.log("SENDER STREAM", senderStream);
   const peer = new webrtc.RTCPeerConnection({
     iceServers: [
@@ -54,7 +54,7 @@ app.post("/consumer", async ({ body }, res) => {
   res.json(payload);
 });
 
-app.post("/broadcast", async ({ body }, res) => {
+app.post("/api/broadcast", async ({ body }, res) => {
   console.log("CALLED", body);
   const peer = new webrtc.RTCPeerConnection({
     iceServers: [
